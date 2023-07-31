@@ -82,9 +82,6 @@ namespace ConnectMongoDB
                 Console.WriteLine("--------------------------");
             }
         }
-        public void FindFilteredLimit()
-        {
-            //var result=_mongoCollection.Find(c=>c.agr>100)
-        }
+     
     }
 }
