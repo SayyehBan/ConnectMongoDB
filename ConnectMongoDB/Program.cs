@@ -19,9 +19,30 @@ class Program
         var personCollection = new MongoDataBaseAction(database).GetPersonCollection("people");
         //Person Action
         //PersonInsert(personCollection);
-        BsonInsert(bsonCollection);
+        //BsonInsert(bsonCollection);
         //personAction.InsertOne(peroson);
+        BsonInsertMany(bsonCollection);
+        //BsonFindAll(bsonCollection);
+        //FindFilter(bsonCollection, 65);
         Console.ReadLine();
+    }
+
+    private static void FindFilter(IMongoCollection<BsonDocument> bsonCollection,int age)
+    {
+        var bsonCollectionAction = new BsonCollectionAction(bsonCollection);
+        bsonCollectionAction.FindFiltered(age);
+    }
+
+    private static void BsonFindAll(IMongoCollection<BsonDocument> bsonCollection)
+    {
+        var bsonCollectionAction = new BsonCollectionAction(bsonCollection);
+        bsonCollectionAction.FindAll();
+    }
+
+    private static void BsonInsertMany(IMongoCollection<BsonDocument> bsonCollection)
+    {
+        var bsonCollectionAction = new BsonCollectionAction(bsonCollection);
+        bsonCollectionAction.InsertMany("Nika", "shahKarami", new string[] { "Group01", "Group02" }, 18);
     }
 
     private static void BsonInsert(IMongoCollection<BsonDocument> bsonCollection)
