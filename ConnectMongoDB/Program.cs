@@ -1,5 +1,6 @@
 ﻿using ConnectMongoDB;
 using ConnectMongoDB.Entites;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 class Program
@@ -17,16 +18,28 @@ class Program
         var bsonCollection = new MongoDataBaseAction(database).GetCollection("BsonCollection");
         var personCollection = new MongoDataBaseAction(database).GetPersonCollection("people");
         //Person Action
+        //PersonInsert(personCollection);
+        BsonInsert(bsonCollection);
+        //personAction.InsertOne(peroson);
+        Console.ReadLine();
+    }
+
+    private static void BsonInsert(IMongoCollection<BsonDocument> bsonCollection)
+    {
+        var bsonCollectionAction = new BsonCollectionAction(bsonCollection);
+        bsonCollectionAction.InsertOne("Nika", "shahKarami", new string[] { "Group01", "Group02" }, 18);
+    }
+
+    private static void PersonInsert(IMongoCollection<Person> personCollection)
+    {
         var personAction = new PersonCollectionAction(personCollection);
         var peroson = new Person
         {
             FirstName = "navid",
             LastName = "afcari",
             Age = 22,
-            Tags = new string[] {"Group01","Group02"}
+            Tags = new string[] { "Group01", "Group02" }
         };
-        personAction.InsertOne(peroson);
-        Console.ReadLine();
     }
 
     private static void GetColectionNames(IMongoDatabase database)
